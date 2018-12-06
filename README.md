@@ -6,8 +6,6 @@ Todo list:
 
 to create:
 
-random color switch
-
 fade 
 
 hue fade
@@ -24,6 +22,7 @@ rain
 
 sweep- add number of sweeps
 
+random color switch
 
 
 completed:
