@@ -11,24 +11,22 @@ void setup()
 
 void loop()
 {
-  sweep(255,0,0,30);
-  sweep(0,0,0,30);
-  sweep(0,255,0,30);
-  sweep(0,0,0,30);
-  sweep(0,0,255,30);
-  sweep(0,0,0,30);
-  sweep(255,255,255,30);
-  sweep(0,0,0,30);
-
+  randomFade(255,0,0,30);
 }
 
-void sweep(byte red, byte green, byte blue, int d)
+void randomFade(byte red, byte green, byte blue, int d)
 {
-  for (int dot = 0; dot < NUM_LEDS; dot++)
+  CRGB newColor = CRGB(red, green, blue);
+  for (int dotRemaining = 0; dotRemaining < NUM_LEDS; dotRemaining++)
   {
-    leds[dot] = CRGB( red, green, blue); // set this pixel to color
-    FastLED.show();
-    delay(d);
+    int randomSelection = random(NUM_LEDS);
+    if(leds[randomSelection] = newColor){
+      dotRemaining --;
+    }else{
+      leds[randomSelection] = CRGB( red, green, blue); // set this pixel to color
+      FastLED.show();
+      delay(d);
+    }
   }
 }
 /*
