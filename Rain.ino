@@ -11,22 +11,16 @@ void setup()
 
 void loop()
 {
-  sweep(255,0,0,30);
-  sweep(0,0,0,30);
-  sweep(0,255,0,30);
-  sweep(0,0,0,30);
-  sweep(0,0,255,30);
-  sweep(0,0,0,30);
-  sweep(255,255,255,30);
-  sweep(0,0,0,30);
-
+  rain(0,0,255,30, NUM_LEDS/2);
+  rain(255,0,0,30,0);
 }
 
-void sweep(byte red, byte green, byte blue, int d)
+void rain(byte red, byte green, byte blue, int d, int center)
 {
-  for (int dot = 0; dot < NUM_LEDS; dot++)
+  for (int dot = 0; dot < NUM_LEDS/2; dot++)
   {
-    leds[dot] = CRGB( red, green, blue); // set this pixel to color
+    leds[(center + dot) %NUM_LEDS] = CRGB( red, green, blue); // set this pixel to color
+    leds[(center-dot)%144] = CRGB(red, green, blue);
     FastLED.show();
     delay(d);
   }
