@@ -2,7 +2,7 @@
 #define NUM_LEDS 144
 #define DATA_PIN 5
 
-#define NUM_STRANDS 6
+#define NUM_STRANDS 15
 
 CRGB leds[NUM_LEDS * NUM_STRANDS];
 //CRGB allLeds[NUM_LEDS * NUM_STRANDS];
