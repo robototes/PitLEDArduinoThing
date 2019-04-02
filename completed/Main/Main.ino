@@ -1,8 +1,8 @@
 #include <FastLED.h>
 #define NUM_LEDS 144
-#define DATA_PIN 6
+#define DATA_PIN 5
 
-#define NUM_STRANDS 3
+#define NUM_STRANDS 6
 
 CRGB leds[NUM_LEDS * NUM_STRANDS];
 //CRGB allLeds[NUM_LEDS * NUM_STRANDS];
@@ -51,12 +51,12 @@ void show() {
 void loop()
 {
 //  Serial.println(millis());
-  //pickRandomFunction();
+  pickRandomFunction();
 //  Serial.println(millis());
-  fillAll(CRGB::Blue);
-  delay(1000);
-  fillAll(CRGB::Green);
-  delay(1000);
+//  fillAll(CRGB::Blue);
+//  delay(1000);
+//  fillAll(CRGB::Green);
+//  delay(1000);
 }
 
 void fillAll(CRGB color) {
