@@ -32,7 +32,7 @@ CRGB GOODCOLORS[6][3] = {
 void setup()
 {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS * NUM_STRANDS);
-  FastLED.setMaxPowerInVoltsAndMilliamps(5, 5000);
+//  FastLED.setMaxPowerInVoltsAndMilliamps(5, 5000);
   randomSeed(analogRead(0));
   //Serial.begin(9600);
 }
