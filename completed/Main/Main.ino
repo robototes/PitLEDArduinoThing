@@ -1,21 +1,9 @@
 #include <FastLED.h>
 #define NUM_LEDS 144
 #define DATA_PIN 5
-
-#define NUM_STRANDS 12
+#define NUM_STRANDS 3
 
 CRGB leds[NUM_LEDS * NUM_STRANDS];
-//CRGB allLeds[NUM_LEDS * NUM_STRANDS];
-
-//CRGB BLUE = CRGB(0, 0, 255);
-//CRGB GREEN  = CRGB(0, 255, 0);
-//CRGB RED = CRGB(255, 0, 0);
-//CRGB YELLOW = CRGB(255 / 2, 255 / 2, 0);
-//CRGB ORANGE = CRGB(255, 40, 0);
-//CRGB CYAN = CRGB(0, 255, 200);
-//CRGB PURPLE = CRGB(255 / 2, 0, 255 / 3);
-//CRGB BLACK = CRGB(0, 0, 0);
-//CRGB WHITE = CRGB(255, 255, 255);
 
 CRGB CONSTCOLORS[8] = {
   CRGB::Red, CRGB::Green, CRGB::Blue, CRGB::Yellow, CRGB::Orange, CRGB::Cyan, CRGB::Purple, CRGB::White
@@ -32,13 +20,10 @@ CRGB GOODCOLORS[6][3] = {
 void setup()
 {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS * NUM_STRANDS);
-//  FastLED.setMaxPowerInVoltsAndMilliamps(5, 5000);
   randomSeed(analogRead(0));
-  //Serial.begin(9600);
 }
 
 void show() {
-
   for (int i = 1; i < NUM_STRANDS; i++) {
     for (int j = 0; j < NUM_LEDS; j++) {
       leds[NUM_LEDS * i + j] = leds[j];
@@ -48,17 +33,11 @@ void show() {
 }
 
 
-  
+
 
 void loop()
 {
-//  Serial.println(millis());
   pickRandomFunction();
-//  Serial.println(millis());
-//  fillAll(CRGB::Blue);
-//  delay(1000);
-//  fillAll(CRGB::Green);
-//  delay(1000);
 }
 
 void fillAll(CRGB color) {
@@ -70,7 +49,6 @@ void fillAll(CRGB color) {
 
 void pickRandomFunction() {
   int randomPick = random(0, 7);
-  //randomPick = 4;
 
   if (randomPick == 0) {
     HSVFill(30);
@@ -135,13 +113,12 @@ void HSVSwirl(int d, int repeat) { // colors to display, delay between movement,
   for (int i = 0; i < NUM_LEDS; i++) { // one rotation
     for (int k = 0 ; k < repeat; k++) {
       for (int j = 0; j < NUM_LEDS / repeat; j += 1) { //this loop jumps to the start of each new color segment by that length
-        //leds[(i + j + k * NUM_LEDS / repeat) % NUM_LEDS] = calculateRGB((double)map(j, 0, NUM_LEDS / repeat, 0, 360));
-        //leds[(i + j + k * NUM_LEDS / repeat) % NUM_LEDS] = hueColors[(int)map(j, 0, NUM_LEDS / repeat, 0, hueRes)];
-        hsv2rgb_spectrum(CHSV(360 / (NUM_LEDS / repeat), 255, 255 / 2), leds[(i + j + k * NUM_LEDS / repeat) % NUM_LEDS]);
-
+        CRGB temp = CRGB(0, 0, 0);
+        hsv2rgb_spectrum(CHSV((double)map(j, 0, NUM_LEDS / repeat, 0, 360), 255, 255), temp);
+        leds[(i + j + k * NUM_LEDS / repeat) % NUM_LEDS] = temp;
       }
     }
-    FastLED.show();
+    show();
     delay(d);
   }
 }
