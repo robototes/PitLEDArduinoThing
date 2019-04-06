@@ -11,11 +11,8 @@ CRGB CONSTCOLORS[8] = {
 
 
 CRGB GOODCOLORS[6][3] = {
-  {CRGB::Green, CRGB::Blue, NULL}, {CRGB::Red, CRGB::Black, NULL}, {CRGB::Red, CRGB::White, NULL}, {CRGB::White, CRGB::Black, NULL}, {CRGB::Purple, CRGB::Yellow, NULL}, {CRGB::Red, CRGB::White, CRGB::Blue}
+  {CRGB::Green, CRGB::Blue, NULL}, {CRGB::Red, CRGB::Black, NULL}, {CRGB::Red, CRGB::White,CRGB::Black }, {CRGB::White, CRGB::Black, NULL}, {CRGB::Purple, CRGB::Yellow, NULL}, {CRGB::Red, CRGB::White, CRGB::Blue}
 };
-
-
-
 
 void setup()
 {
@@ -48,8 +45,8 @@ void fillAll(CRGB color) {
 }
 
 void pickRandomFunction() {
-  int randomPick = random(0, 7);
-
+//  int randomPick = random(0, 7);
+  int randomPick = 2; // 2 is stuck, 3 works, 4 crashes after a while (turns black), 5 and 6 work
   if (randomPick == 0) {
     HSVFill(30);
   }
@@ -62,11 +59,11 @@ void pickRandomFunction() {
 
 
   else if (randomPick == 2) {
-    CRGB colors[3] = GOODCOLORS[random(sizeof(GOODCOLORS))];
+    CRGB colors[3] = GOODCOLORS[random(sizeof(GOODCOLORS)/sizeof(GOODCOLORS[0]))];
     if (colors[2]) {
-      swirl(colors, 3, 30, random(0, 6));
+      newSwirl(colors, 3, 30, random(0, 6));
     } else {
-      swirl(colors, 2, 30, random(0, 6));
+      newSwirl(colors, 2, 30, 2);
     }
   }
 
@@ -135,6 +132,24 @@ void swirl( CRGB colors[], int numColors,  int d, int repeat) { // colors to dis
         leds[(i + j + k) % NUM_LEDS] = colors[currentColor % numColors];
       }
       currentColor++;
+    }
+    show();
+    delay(d);
+  }
+}
+
+void newSwirl(CRGB colors[], int numColors,  int d, int repeat) {
+  int segmentLength = (int) floor(NUM_LEDS / (numColors * repeat));
+  for(int startingLEDIndex = 0; startingLEDIndex < NUM_LEDS; startingLEDIndex++) { // The index of the LED where the first color segment starts.
+    int colorIndex = 0; // The index of the current color we're using.
+    int lastTransitionLEDIndex = startingLEDIndex; // The index of the LED in between the segments (where the strip changes color).
+    for(int i = startingLEDIndex; i < startingLEDIndex + NUM_LEDS; i++) {
+      int scaledIndex = i % NUM_LEDS; // Rescale so we loop back around to the beginning if startingLEDIndex is greater than zero.
+      if(i - lastTransitionLEDIndex == segmentLength) { // New segment
+        colorIndex = (colorIndex + 1) % numColors;
+        lastTransitionLEDIndex = i;
+      }
+      leds[scaledIndex] = colors[colorIndex];
     }
     show();
     delay(d);
