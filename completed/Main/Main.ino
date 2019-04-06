@@ -61,9 +61,9 @@ void pickRandomFunction() {
   else if (randomPick == 2) {
     CRGB colors[3] = GOODCOLORS[random(sizeof(GOODCOLORS)/sizeof(GOODCOLORS[0]))];
     if (colors[2]) {
-      newSwirl(colors, 3, 30, random(0, 6));
+      newSwirl(colors, 3, 1, random(0, 6));
     } else {
-      newSwirl(colors, 2, 30, 2);
+      newSwirl(colors, 2, 1, 2);
     }
   }
 
