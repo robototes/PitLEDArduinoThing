@@ -11,13 +11,14 @@ CRGB CONSTCOLORS[8] = {
 
 
 CRGB GOODCOLORS[6][3] = {
-  {CRGB::Green, CRGB::Blue, NULL}, {CRGB::Red, CRGB::Black, NULL}, {CRGB::Red, CRGB::White,CRGB::Black }, {CRGB::White, CRGB::Black, NULL}, {CRGB::Purple, CRGB::Yellow, NULL}, {CRGB::Red, CRGB::White, CRGB::Blue}
+  {CRGB::Green, CRGB::Blue, NULL}, {CRGB::Red, CRGB::Black, NULL}, {CRGB::Red, CRGB::White, CRGB::Black }, {CRGB::White, CRGB::Black, NULL}, {CRGB::Purple, CRGB::Yellow, NULL}, {CRGB::Red, CRGB::White, CRGB::Blue}
 };
 
 void setup()
 {
   FastLED.addLeds<NEOPIXEL, DATA_PIN>(leds, NUM_LEDS * NUM_STRANDS);
   randomSeed(analogRead(0));
+  startup(CRGB::Red, 300, 60);
 }
 
 void show() {
@@ -45,8 +46,8 @@ void fillAll(CRGB color) {
 }
 
 void pickRandomFunction() {
-//  int randomPick = random(0, 7);
-  int randomPick = 2; // 2 is stuck, 3 works, 4 crashes after a while (turns black), 5 and 6 work
+  int randomPick = random(0, 7);
+  //  int randomPick = 2; // 2 is stuck, 3 works, 4 crashes after a while (turns black), 5 and 6 work
   if (randomPick == 0) {
     HSVFill(30);
   }
@@ -59,7 +60,7 @@ void pickRandomFunction() {
 
 
   else if (randomPick == 2) {
-    CRGB colors[3] = GOODCOLORS[random(sizeof(GOODCOLORS)/sizeof(GOODCOLORS[0]))];
+    CRGB colors[3] = GOODCOLORS[random(sizeof(GOODCOLORS) / sizeof(GOODCOLORS[0]))];
     if (colors[2]) {
       newSwirl(colors, 3, 1, random(2, 6));
     } else {
@@ -111,7 +112,7 @@ void HSVSwirl(int d, int repeat) { // colors to display, delay between movement,
     for (int k = 0 ; k < repeat; k++) {
       for (int j = 0; j < NUM_LEDS / repeat; j += 1) { //this loop jumps to the start of each new color segment by that length
         CRGB temp = CRGB(0, 0, 0);
-        hsv2rgb_spectrum(CHSV((double)map(j, 0, NUM_LEDS / repeat, 0, 360), 255, 255), temp);
+        hsv2rgb_spectrum(CHSV((double)map(j, 0, NUM_LEDS / repeat, 0, 255), 255, 255), temp);
         leds[(i + j + k * NUM_LEDS / repeat) % NUM_LEDS] = temp;
       }
     }
@@ -140,12 +141,12 @@ void swirl( CRGB colors[], int numColors,  int d, int repeat) { // colors to dis
 
 void newSwirl(CRGB colors[], int numColors,  int d, int repeat) {
   int segmentLength = (int) floor(NUM_LEDS / (numColors * repeat));
-  for(int startingLEDIndex = 0; startingLEDIndex < NUM_LEDS; startingLEDIndex++) { // The index of the LED where the first color segment starts.
+  for (int startingLEDIndex = 0; startingLEDIndex < NUM_LEDS; startingLEDIndex++) { // The index of the LED where the first color segment starts.
     int colorIndex = 0; // The index of the current color we're using.
     int lastTransitionLEDIndex = startingLEDIndex; // The index of the LED in between the segments (where the strip changes color).
-    for(int i = startingLEDIndex; i < startingLEDIndex + NUM_LEDS; i++) {
+    for (int i = startingLEDIndex; i < startingLEDIndex + NUM_LEDS; i++) {
       int scaledIndex = i % NUM_LEDS; // Rescale so we loop back around to the beginning if startingLEDIndex is greater than zero.
-      if(i - lastTransitionLEDIndex == segmentLength) { // New segment
+      if (i - lastTransitionLEDIndex == segmentLength) { // New segment
         colorIndex = (colorIndex + 1) % numColors;
         lastTransitionLEDIndex = i;
       }
@@ -225,5 +226,48 @@ void smoothFade(CRGB toColor, int d) {
     }
     delay(d);
     show();
+  }
+}
+
+
+
+void startup(CRGB color, int startDelay, int minDelay) {
+  int d = startDelay;
+  int dSub = (startDelay - minDelay) / (5 * NUM_STRANDS);
+  fillAll(CRGB::Black);
+  for (int j = 0; j < NUM_STRANDS; j++) {
+    for (int i = 61; i < 83; i++) {
+      leds[i + j * 144] = color;
+    }
+    FastLED.show();
+    delay(d);
+    d -= dSub;
+    for (int i = 0; i < 12; i++) {
+      leds[83 + i  + j * 144] = color;
+      leds[62 - i + j * 144] = color;
+    }
+    FastLED.show();
+    delay(d);
+    d -= dSub;
+    for (int i = 0; i < 24; i++) {
+      leds[96 + i + j * 144] = color;
+      leds[49 - i + j * 144] = color;
+    }
+    FastLED.show();
+    delay(d);
+    d -= dSub;
+    for (int i = 0; i < 12; i++) {
+      leds[121 + i + j * 144] = color;
+      leds[22 - i + j * 144] = color;
+    }
+    FastLED.show();
+    delay(d);
+    d -= dSub;
+    for (int i = 134; i < 155; i++) {
+      leds[i % 144 + j * 144] = color;
+    }
+    FastLED.show();
+    delay(d);
+    d -= dSub;
   }
 }
