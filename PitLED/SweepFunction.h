@@ -1,12 +1,12 @@
 #include <FastLED.h>
 #include "LEDFunction.h"
-#ifndef SWIRL_H
-#define SWIRL_H
+#ifndef SWEEP_H
+#define SWEEP_H
 
-class SwirlFunction: public LEDFunction {
+class SweepFunction: public LEDFunction {
     int repeat;
   public:
-    SwirlFunction(int _repeats);
+    SweepFunction(int _repeats);
     void execute(CRGB * leds, int numLeds, int numStrands, CRGB color, int d);
     void show(CRGB * leds, int numLeds, int numStrands);
 };

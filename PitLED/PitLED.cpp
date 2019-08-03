@@ -4,6 +4,11 @@
 #include "LEDFunction.h"
 
 
+#define NUMCOLORS 8
+CRGB CONSTCOLORS[NUMCOLORS] = {
+  CRGB::Red, CRGB::Green, CRGB::Blue, CRGB::Yellow, CRGB::Orange, CRGB::Cyan, CRGB::Purple, CRGB::White
+};
+
 PitLED::PitLED(int strands, int ledsPerStrand) {
   numStrands = strands;
   numLEDsPerStrand = ledsPerStrand;
@@ -35,6 +40,6 @@ PitLED::~PitLED() {
 }
 
 void PitLED::runFunction(LEDFunction *function, int d) {
-  CRGB colors[] = {CRGB::Red, CRGB::Green, CRGB::Orange};
-  function->execute(leds, numLEDsPerStrand, numStrands, colors, d);
+  CRGB color = CONSTCOLORS[random(NUMCOLORS)];
+  function->execute(leds, numLEDsPerStrand, numStrands, color, d);
 }

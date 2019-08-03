@@ -4,7 +4,7 @@
 
 class LEDFunction {
   public:
-    virtual void execute(CRGB* leds, int numLeds,int numStrands, CRGB colors[], int d);
+    virtual void execute(CRGB* leds, int numLeds,int numStrands, CRGB color, int d);
     void show(CRGB* leds, int numLeds,int numStrands);
 };
 

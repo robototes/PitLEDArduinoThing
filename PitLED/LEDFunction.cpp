@@ -11,10 +11,10 @@ void LEDFunction::show(CRGB* leds, int numLEDsPerStrand, int numStrands) {
   FastLED.show();
 }
 
-void LEDFunction::execute(CRGB* leds, int numLeds, int numStrands, CRGB colors[], int d) {
+void LEDFunction::execute(CRGB* leds, int numLeds, int numStrands, CRGB color, int d) {
   Serial.println("Running base red function");
   for (int i = 0; i < numLeds; i++) {
-    leds[i] = CRGB::Red;
+    leds[i] = color;
   }
   show(leds, numLeds, numStrands);
   delay(1000);

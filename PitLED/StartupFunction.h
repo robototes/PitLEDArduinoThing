@@ -1,12 +1,12 @@
 #include <FastLED.h>
 #include "LEDFunction.h"
-#ifndef SWIRL_H
-#define SWIRL_H
+#ifndef STARTUP_H
+#define STARTUP_H
 
-class SwirlFunction: public LEDFunction {
-    int repeat;
+class StartupFunction: public LEDFunction {
+    int dMin;
   public:
-    SwirlFunction(int _repeats);
+    StartupFunction(int _dMin);
     void execute(CRGB * leds, int numLeds, int numStrands, CRGB color, int d);
     void show(CRGB * leds, int numLeds, int numStrands);
 };

@@ -1,12 +1,11 @@
 #include <FastLED.h>
 #include "LEDFunction.h"
-#ifndef SWIRL_H
-#define SWIRL_H
+#ifndef RANDOMFADE_H
+#define RANDOMFADE_H
 
-class SwirlFunction: public LEDFunction {
-    int repeat;
+class RandomFadeFunction: public LEDFunction {
   public:
-    SwirlFunction(int _repeats);
+    RandomFadeFunction();
     void execute(CRGB * leds, int numLeds, int numStrands, CRGB color, int d);
     void show(CRGB * leds, int numLeds, int numStrands);
 };
