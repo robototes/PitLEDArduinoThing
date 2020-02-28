@@ -4,9 +4,9 @@
 #include "LEDFunction.h"
 
 
-#define NUMCOLORS 8
+#define NUMCOLORS 4
 CRGB CONSTCOLORS[NUMCOLORS] = {
-  CRGB::Red, CRGB::Green, CRGB::Blue, CRGB::Yellow, CRGB::Orange, CRGB::Cyan, CRGB::Purple, CRGB::White
+  CRGB::Red, CRGB::Blue, CRGB::White, CRGB::Black
 };
 
 PitLED::PitLED(int strands, int ledsPerStrand) {

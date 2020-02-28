@@ -32,17 +32,17 @@ void setup()
 void loop()
 {
 
-  LEDFunction* functions[7];
+  LEDFunction* functions[5];
 
   functions[0] = new SwirlFunction(random(6) + 1);
-  functions[1] = new HSVFillFunction();
-  functions[2] = new HSVSwirlFunction(random(6) + 1);
-  functions[3] = new SweepFunction(random(6) + 1);
-  functions[4] = new RandomFadeFunction();
-  functions[5] = new RainFunction();
-  functions[6] = new SmoothFadeFunction();
+//  functions[1] = new HSVFillFunction();
+//  functions[2] = new HSVSwirlFunction(random(6) + 1);
+  functions[1] = new SweepFunction(random(6) + 1);
+  functions[2] = new RandomFadeFunction();
+  functions[3] = new RainFunction();
+  functions[4] = new SmoothFadeFunction();
 
-  pitLed.runFunction(functions[random(7)], 20);
+  pitLed.runFunction(functions[random(5)], 20);
   Serial.print("Free Memory: ");
   Serial.println(freeMemory(), DEC);
   Serial.println();
