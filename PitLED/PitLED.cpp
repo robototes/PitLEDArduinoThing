@@ -34,7 +34,11 @@ PitLED::~PitLED() {
   delete leds;
 }
 
-void PitLED::runFunction(void (*func)(CRGB*, int, int, CRGB, int, int), int d) {
+void PitLED::runFunctionWithRandom(void (*func)(CRGB*, int, int, CRGB, int, int), int d) {
   CRGB color = CONSTCOLORS[random(NUMCOLORS)];
-  func(leds, numLEDsPerStrand, numStrands, color, d, 1);
+  runFunctionWithSet(func, d, color, random(5) + 1);
+}
+
+void PitLED::runFunctionWithSet(void (*func)(CRGB*, int, int, CRGB, int, int), int d, CRGB color, int repeats) {
+  func(leds, numLEDsPerStrand, numStrands, color, d, repeats);
 }

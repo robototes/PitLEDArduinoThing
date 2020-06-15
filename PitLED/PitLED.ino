@@ -6,14 +6,14 @@
 
 #define NUM_LEDS 144
 #define DATA_PIN 5
-#define NUM_STRANDS 15
+#define NUM_STRANDS 6
 
 PitLED pitLed(NUM_STRANDS, NUM_LEDS);
 void setup()
 {
   Serial.begin(9600);
   Serial.println("Starting program...");
-  pitLed.runFunction(&StartupFunction, 300);
+  pitLed.runFunctionWithSet(&StartupFunction, 300, CRGB::Red, 60);
   randomSeed(0);
 }
 
@@ -29,5 +29,5 @@ void loop()
   functions[3] = &RainFunction;
   functions[4] = &SmoothFadeFunction;
 
-  pitLed.runFunction(functions[random(5)], 20);
+  pitLed.runFunctionWithRandom(functions[random(5)], 20);
 }

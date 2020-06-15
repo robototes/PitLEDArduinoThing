@@ -9,7 +9,8 @@ class PitLED {
   public:
     PitLED(int strands, int ledsPerStrand);
     void init();
-    void runFunction(void (*func)(CRGB*, int, int, CRGB, int, int), int d);
+    void runFunctionWithRandom(void (*func)(CRGB*, int, int, CRGB, int, int), int d);
+    void runFunctionWithSet(void (*func)(CRGB*, int, int, CRGB, int, int), int d, CRGB color, int repeats);
     void show();
     ~PitLED();
 };

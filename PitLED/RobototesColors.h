@@ -4,7 +4,7 @@
 #define COLORS_H
 
 #define NUMCOLORS 4
-CRGB CONSTCOLORS[NUMCOLORS] = {
+const CRGB CONSTCOLORS[NUMCOLORS] = {
   CRGB::Red, CRGB::Blue, CRGB::White, CRGB::Black
 };
 
@@ -40,14 +40,14 @@ const TProgmemPalette16 Sammamish PROGMEM =
   CRGB::White
 };
 #define TWOCOLORS 1
-CRGBPalette16 twoColors[TWOCOLORS]  = {
+const CRGBPalette16 twoColors[TWOCOLORS]  = {
   Robototes
 //  Huskies,
 //  Seahawks
 };
 
 #define THREECOLORS 2
-CRGBPalette16 threeColors[THREECOLORS]  = {
+const CRGBPalette16 threeColors[THREECOLORS]  = {
   FirstColors,
   Sammamish
 };
