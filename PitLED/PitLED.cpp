@@ -1,13 +1,8 @@
 #include <FastLED.h>
 
 #include "PitLED.h"
-#include "LEDFunction.h"
+#include "RobototesColors.h"
 
-
-#define NUMCOLORS 4
-CRGB CONSTCOLORS[NUMCOLORS] = {
-  CRGB::Red, CRGB::Blue, CRGB::White, CRGB::Black
-};
 
 PitLED::PitLED(int strands, int ledsPerStrand) {
   numStrands = strands;
@@ -39,7 +34,7 @@ PitLED::~PitLED() {
   delete leds;
 }
 
-void PitLED::runFunction(LEDFunction *function, int d) {
+void PitLED::runFunction(void (*func)(CRGB*, int, int, CRGB, int, int), int d) {
   CRGB color = CONSTCOLORS[random(NUMCOLORS)];
-  function->execute(leds, numLEDsPerStrand, numStrands, color, d);
+  func(leds, numLEDsPerStrand, numStrands, color, d, 1);
 }

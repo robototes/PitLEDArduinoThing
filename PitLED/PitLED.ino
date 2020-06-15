@@ -1,49 +1,31 @@
-#include <MemoryFree.h>
-#include <pgmStrToRAM.h>
-
-//#include <PitLED.h>
-
 #include <FastLED.h>
 #include "PitLED.h"
-#include "SwirlFunction.h"
-#include "HSVFillFunction.h"
-#include "HSVSwirlFunction.h"
-#include "SweepFunction.h"
-#include "RandomFadeFunction.h"
-#include "RainFunction.h"
-#include "SmoothFadeFunction.h"
-#include "StartupFunction.h"
-#include "LEDFunction.h"
+#include "Functions.h"
+
 #define NUM_LEDS 144
 #define DATA_PIN 5
 #define NUM_STRANDS 15
 
-CRGB leds[NUM_LEDS * NUM_STRANDS];
 PitLED pitLed(NUM_STRANDS, NUM_LEDS);
 void setup()
 {
   Serial.begin(9600);
   Serial.println("Starting program...");
-  StartupFunction * startupFunction = new StartupFunction(60);
-  pitLed.runFunction( startupFunction, 300);
+  pitLed.runFunction(&StartupFunction, 300);
   randomSeed(analogRead(0));
 }
 
 void loop()
 {
+  void (* functions [5])(CRGB*, int, int, CRGB, int, int);
 
-  LEDFunction* functions[5];
-
-  functions[0] = new SwirlFunction(random(6) + 1);
-//  functions[1] = new HSVFillFunction();
-//  functions[2] = new HSVSwirlFunction(random(6) + 1);
-  functions[1] = new SweepFunction(random(6) + 1);
-  functions[2] = new RandomFadeFunction();
-  functions[3] = new RainFunction();
-  functions[4] = new SmoothFadeFunction();
+  functions[0] = &SwirlFunction;
+//  functions[1] = &HSVFillFunction;
+//  functions[2] = &HSVSwirlFunction;
+  functions[1] = &SweepFunction;
+  functions[2] = &RandomFadeFunction;
+  functions[3] = &RainFunction;
+  functions[4] = &SmoothFadeFunction;
 
   pitLed.runFunction(functions[random(5)], 20);
-  Serial.print("Free Memory: ");
-  Serial.println(freeMemory(), DEC);
-  Serial.println();
 }

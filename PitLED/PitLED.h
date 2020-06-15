@@ -1,5 +1,4 @@
 #include <FastLED.h>
-#include "LEDFunction.h"
 
 #ifndef PitLED_H
 #define PitLED_H
@@ -10,7 +9,7 @@ class PitLED {
   public:
     PitLED(int strands, int ledsPerStrand);
     void init();
-    void runFunction(LEDFunction *function, int d);
+    void runFunction(void (*func)(CRGB*, int, int, CRGB, int, int), int d);
     void show();
     ~PitLED();
 };
