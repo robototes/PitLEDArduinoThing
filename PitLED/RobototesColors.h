@@ -40,14 +40,14 @@ const TProgmemPalette16 Sammamish PROGMEM =
   CRGB::White
 };
 #define TWOCOLORS 1
-const CRGBPalette16 twoColors[TWOCOLORS]  = {
+const CRGBPalette16 twoColors[TWOCOLORS] = {
   Robototes
-//  Huskies,
-//  Seahawks
+  //  Huskies,
+  //  Seahawks
 };
 
 #define THREECOLORS 2
-const CRGBPalette16 threeColors[THREECOLORS]  = {
+const CRGBPalette16 threeColors[THREECOLORS] = {
   FirstColors,
   Sammamish
 };

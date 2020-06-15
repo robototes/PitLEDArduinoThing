@@ -95,9 +95,9 @@ CRGB lerp(CRGB from, CRGB to, double percent) {
 
 void SmoothFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running Smooth Fade Function");
-  
+
   CRGB oldLeds[numLeds];
-  for (int i = 0; i <numLeds; i++) {
+  for (int i = 0; i < numLeds; i++) {
     oldLeds[i] = leds[i];
   }
 
@@ -171,11 +171,11 @@ void SweepFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, 
 
 void SwirlFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running swirl function");
-  int numColors = (int)color.r % 2 + 1;
+  int numColors = (int)color.r % 2 + 2;
   CRGBPalette16 palette;
   if (numColors == 2) {
     palette = twoColors[color.g % TWOCOLORS];
-  }else if(numColors == 3){
+  } else if (numColors == 3) {
     palette = threeColors[color.g % THREECOLORS];
   }
   int segmentLength = (int) floor(numLeds / (numColors * repeats));

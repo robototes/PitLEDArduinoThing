@@ -22,12 +22,12 @@ void loop()
   void (* functions [5])(CRGB*, int, int, CRGB, int, int);
 
   functions[0] = &SwirlFunction;
-//  functions[1] = &HSVFillFunction;
-//  functions[2] = &HSVSwirlFunction;
+  //  functions[1] = &HSVFillFunction;
+  //  functions[2] = &HSVSwirlFunction;
   functions[1] = &SweepFunction;
   functions[2] = &RandomFadeFunction;
   functions[3] = &RainFunction;
   functions[4] = &SmoothFadeFunction;
 
-  pitLed.runFunctionWithRandom(functions[random(5)], 20);
+  pitLed.runFunctionWithRandom(functions[random(5)], 40);
 }
