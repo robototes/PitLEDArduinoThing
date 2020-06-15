@@ -1,6 +1,8 @@
 #include <FastLED.h>
-#include "PitLED.h"
 #include "Functions.h"
+#include "PitLED.h"
+
+
 
 #define NUM_LEDS 144
 #define DATA_PIN 5
@@ -12,7 +14,7 @@ void setup()
   Serial.begin(9600);
   Serial.println("Starting program...");
   pitLed.runFunction(&StartupFunction, 300);
-  randomSeed(analogRead(0));
+  randomSeed(0);
 }
 
 void loop()

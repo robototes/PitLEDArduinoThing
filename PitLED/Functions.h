@@ -118,7 +118,6 @@ void SmoothFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, in
   Serial.println("Smooth Fade Function completed");
 }
 
-
 void StartupFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int startDelay, int repeats) {
   Serial.println("Running Startup function");
   color = CRGB::Red;

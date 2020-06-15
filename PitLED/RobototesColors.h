@@ -45,6 +45,7 @@ CRGBPalette16 twoColors[TWOCOLORS]  = {
 //  Huskies,
 //  Seahawks
 };
+
 #define THREECOLORS 2
 CRGBPalette16 threeColors[THREECOLORS]  = {
   FirstColors,
