@@ -9,6 +9,15 @@ void show(CRGB* leds, int numLEDsPerStrand, int numStrands) {
   FastLED.show();
 }
 
+void printColor(CRGB color) {
+  Serial.print("r: ");
+  Serial.print(color.r);
+  Serial.print(", g: ");
+  Serial.print(color.g);
+  Serial.print(", b: ");
+  Serial.println(color.b);
+}
+
 void HSVFillFunction(CRGB* leds, int numLeds, int numStrands, CRGB color, int d, int repeats) {
   Serial.println("Starting HSVFill function");
   for (int i = 0; i < 255; i++) {
@@ -18,7 +27,7 @@ void HSVFillFunction(CRGB* leds, int numLeds, int numStrands, CRGB color, int d,
       leds[j] = color;
     }
     show(leds, numLeds, numStrands);
-    FastLED.delay(d);
+    delay(d);
   }
   Serial.println("HSVFill function finished");
 }
@@ -34,13 +43,14 @@ void HSVSwirlFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int 
       }
     }
     show(leds, numLeds, numStrands);
-    FastLED.delay(d);
+    delay(d);
   }
   Serial.println("HSVSwirl function completed");
 }
 
 void RainFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running Rain function");
+  printColor(color);
   int center = 72;
   for (int dot = 0; dot < numLeds / 2; dot++)
   {
@@ -52,7 +62,7 @@ void RainFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, i
     }
 
     show(leds, numLeds, numStrands);
-    FastLED.delay(d);
+    delay(d);
   }
 
   Serial.println("Rain function completed");
@@ -60,6 +70,7 @@ void RainFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, i
 
 void RandomFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running Random Fade function");
+  printColor(color);
 
   int numAlready = 0;
   for (int i = 0; i < numLeds; i++) {
@@ -75,7 +86,7 @@ void RandomFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, in
     } else {
       leds[randomSelection] = color; // set this pixel to color
       show(leds, numLeds, numStrands);
-      FastLED.delay(d);
+      delay(d);
     }
   }
   Serial.println("Random Fade function completed");
@@ -95,7 +106,7 @@ CRGB lerp(CRGB from, CRGB to, double percent) {
 
 void SmoothFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running Smooth Fade Function");
-
+  printColor(color);
   CRGB oldLeds[numLeds];
   for (int i = 0; i < numLeds; i++) {
     oldLeds[i] = leds[i];
@@ -106,7 +117,7 @@ void SmoothFadeFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, in
       leds[j] = lerp(oldLeds[j], color, i);
     }
     show(leds, numLeds, numStrands);
-    FastLED.delay(d);
+    delay(d);
   }
 
   Serial.println("Smooth Fade Function completed");
@@ -157,6 +168,7 @@ void StartupFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int s
 
 void SweepFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running Sweep function");
+  printColor(color);
   for (int dot = 0; dot < numLeds / repeats; dot++)
   {
     for (int i = 0; i < repeats; i++)
@@ -164,13 +176,14 @@ void SweepFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, 
       leds[(dot + i * numLeds / repeats) % numLeds] = color; // set this pixel to color, mod is to be safe
     }
     show(leds, numLeds, numStrands);
-    FastLED.delay(d);
+    delay(d);
   }
   Serial.println("Sweep function completed");
 }
 
 void SwirlFunction(CRGB* leds, int numLeds, int numStrands,  CRGB color, int d, int repeats) {
   Serial.println("Running swirl function");
+  printColor(color);
   int numColors = (int)color.r % 2 + 2;
   CRGBPalette16 palette;
   if (numColors == 2) {

@@ -3,9 +3,9 @@
 #ifndef COLORS_H
 #define COLORS_H
 
-#define NUMCOLORS 4
+#define NUMCOLORS 10
 const CRGB CONSTCOLORS[NUMCOLORS] = {
-  CRGB::Red, CRGB::Blue, CRGB::White, CRGB::Black
+  CRGB::Red, CRGB::Blue, CRGB::White, CRGB::Black, CRGB::Green, CRGB::Orange, CRGB::Purple, CRGB::Cyan, CRGB::Yellow, CRGB::Gray
 };
 
 const TProgmemPalette16 FirstColors PROGMEM =
@@ -39,11 +39,11 @@ const TProgmemPalette16 Sammamish PROGMEM =
   CRGB::Black,
   CRGB::White
 };
-#define TWOCOLORS 1
+#define TWOCOLORS 3
 const CRGBPalette16 twoColors[TWOCOLORS] = {
-  Robototes
-  //  Huskies,
-  //  Seahawks
+  Robototes,
+  Huskies,
+  Seahawks
 };
 
 #define THREECOLORS 2
